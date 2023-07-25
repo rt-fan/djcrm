@@ -1,0 +1,33 @@
+{% extends "website/base.html" %}
+{% block content %}
+  <h3>Информация о сотруднике</h3>
+  <div class="row">
+  <div class="card col-8 mb-3">
+    <div class="card-body">
+      <div class="card_inline">
+        <h5 class="card-title">{{ staff.first_name }} {{ staff.last_name }}</h5>
+        <br>
+        <p class="card-text"><strong>Номер телефона: </strong> {{ staff.phone }}</p>
+        <p class="card-text"><strong>Дата рождения: </strong> {{ staff.age }}</p>
+        <p class="card-text"><strong>Подразделение: </strong> {{ staff.division }}</p>
+        <p class="card-text"><strong>Дата создания: </strong> {{ staff.created_at }}</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-1">
+  </div>
+  <div class="card1 col-3 mb-3">
+    {% if staff.photo_passport %}
+      <img class="img-article-left thumb" src="{{staff.photo_passport.url}}" width="240">
+    {% endif %}
+  </div>
+</div>
+
+
+  <a href="{% url 'staffs' %}" class="btn btn-secondary">Назад</a>
+  <a href="#" class="btn btn-success">Изменить</a>
+  {% if user.is_staff %}
+  <a href="#" class="btn btn-danger">Удалить</a>
+  {% endif %}
+
+{% endblock content %}

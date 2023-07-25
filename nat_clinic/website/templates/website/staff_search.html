@@ -1,0 +1,64 @@
+{% extends "website/base.html" %}
+{% block content %}
+{% if user.is_authenticated %}
+
+    <div class="media text-muted pt-3">
+    <div class="media-body pb-3 mb-0 small lh-125">
+    <div class="d-flex justify-content-between align-items-center w-100">
+    {% if user.is_staff %}
+    <a href="#" class="btn btn-success">Зарегистрировать сотрудника</a>
+    {% endif %}
+    <form method="post" action="/staff_search/">
+    {% csrf_token %}
+    {{ form }}
+    </form>
+    </div></div></div>
+
+    <table class="table table-bordered table-hover">
+      <thead class="table-success">
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Имя Фамилия</th>
+          <th scope="col">Номер телефона</th>
+          <th scope="col">Подразделение</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% if results %}
+        {% for staff in results %}
+        <tr>
+          <td>{{ staff.id }}</td>
+          <td><a href="{% url 'staff' staff.id %}">{{ staff.first_name }} {{ staff.last_name }}</a></td>
+          <td>
+            {{ staff.phone }}
+          </td>
+          <td>
+            {{ staff.division }}
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    {% else %}
+        Поиск не дал результатов.
+    {% endif %}
+
+  {% else %}
+  <div class="col-md-6 offset-md-3">
+    <h3>Авторизация</h3>
+    <br>
+    <form action="{% url 'home' %}" method="post">
+      {% csrf_token %}
+      <div class="mb-3">
+        <input type="text" class="form-control" name="username" placeholder="Логин" required>
+      </div>
+      <div class="mb-3">
+        <input type="password" class="form-control" name="password" placeholder="Пароль" required>
+      </div>
+      <button type="submit" class="btn btn-success">Войти</button>
+    </form>
+  </div>
+  {% endif %}
+
+{% endblock content %}

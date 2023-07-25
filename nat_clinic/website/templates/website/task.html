@@ -1,0 +1,29 @@
+{% extends "website/base.html" %}
+
+
+{% block content %}
+<div class="card w-75 mb-3">
+    <div class="card-body">
+      <h5 class="card-title">Заявка №{{ task.id }}</h5>
+      <br>
+      <p class="card-text"><strong>Клиент: </strong>
+            {% for i in task.clients.all %}
+            <br> <a href="{% url 'client' i.id %}">{{ i.first_name }} {{ i.last_name }}</a>
+            {% endfor %}
+      </p>
+      <p class="card-text"><strong>Телефон: </strong> {{ task.phone }}</p>
+      <p class="card-text"><strong>Поток: </strong> {{ task.potok }}</p>
+      <p class="card-text"><strong>Комната: </strong> {{ task.room }}</p>
+      <p class="card-text"><strong>Статус: </strong> {{ task.status }}</p>
+      <p class="card-text"><strong>Оплачено: </strong> {{ task.money }}</p>
+      <p class="card-text"><strong>Создано: </strong> {{ task.created_at }}</p>
+    </div>
+  </div>
+
+  <a href="{% url 'tasks' %}" class="btn btn-secondary">Назад</a>
+  <a href="{% url 'update_task' task.id %}" class="btn btn-success">Изменить</a>
+  {% if user.is_staff %}
+  <a href="{% url 'delete_task' task.id %}" class="btn btn-danger">Удалить</a>
+  {% endif %}
+
+{% endblock content %}

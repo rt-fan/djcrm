@@ -1,0 +1,13 @@
+{% extends "website/base.html" %}
+{% block content %}
+
+<div class="col-md-6 offset-md-3">
+    <h1>Новая заявка</h1>
+    <form action="{% url 'add_task' %}" method="post">
+        {% csrf_token %}
+        {{form.as_p}}
+        <button type="submit" class="btn btn-success">Сохранить</button>
+    </form>
+    </div>
+
+{% endblock content %}

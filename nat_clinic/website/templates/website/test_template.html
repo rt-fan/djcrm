@@ -1,0 +1,8 @@
+{% extends "website/base.html" %}
+{% block content %}
+{% if user.is_authenticated %}
+
+<h2>Тестовая страница шаблонов</h2>
+{{ user.first_name }} {{ user.last_name }}
+{% endif %}
+{% endblock content %}

@@ -1,0 +1,23 @@
+{% extends "website/base.html" %}
+{% block content %}
+  <h3>Просмотр клиента</h3>
+  <div class="card w-75 mb-3">
+    <div class="card-body">
+      <h5 class="card-title">{{ client.first_name }} {{ client.last_name }}</h5>
+        <br>
+      <p class="card-text"><strong>Номер телефона: </strong> {{ client.phone }}</p>
+      <p class="card-text"><strong>Год рождения: </strong> {{ client.age }}</p>
+      <p class="card-text"><strong>Рейтинг: </strong> {{ client.rating }}</p>
+      <p class="card-text"><strong>Комментарии: </strong> {{ client.comments }}</p>
+      <p class="card-text"><strong>История посещений: </strong> {{ client.history }}</p>
+      <p class="card-text"><strong>Дата создания: </strong> {{ client.created_at }}</p>
+    </div>
+  </div>
+
+  <a href="{% url 'clients' %}" class="btn btn-secondary">Назад</a>
+  <a href="{% url 'update_client' client.id %}" class="btn btn-success">Изменить</a>
+  {% if user.is_staff %}
+  <a href="{% url 'delete_client' client.id %}" class="btn btn-danger">Удалить</a>
+  {% endif %}
+
+{% endblock content %}

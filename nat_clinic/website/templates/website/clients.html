@@ -1,0 +1,64 @@
+{% extends "website/base.html" %}
+{% block content %}
+{% if user.is_authenticated %}
+
+    <div class="media text-muted pt-3">
+    <div class="media-body pb-3 mb-0 small lh-125">
+    <div class="d-flex justify-content-between align-items-center w-100">
+    <strong class="text-gray-dark"><a href="/add_client/" class="btn btn-success">Новый клиент</a></strong>
+    <form method="post" action="/client_search/">
+    {% csrf_token %}
+    {{ form }}
+    </form>
+    </div></div></div>
+
+    <table class="table table-bordered table-hover">
+      <thead class="table-success">
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Имя Фамилия</th>
+          <th scope="col">Номер телефона</th>
+          <th scope="col">Год рождения</th>
+          <th scope="col">Рейтинг</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% if clients %}
+        {% for client in clients %}
+        <tr>
+          <td>{{ client.id }}</td>
+          <td><a href="{% url 'client' client.id %}">{{ client.first_name }} {{ client.last_name }}</a></td>
+          <td>
+            {{ client.phone }}
+          </td>
+          <td>
+            {{ client.age }}
+          </td>
+          <td>
+            {{ client.rating }}
+          </td>
+        </tr>
+        {% endfor %}
+        {% endif %}
+      </tbody>
+    </table>
+
+  <br>
+  {% else %}
+  <div class="col-md-6 offset-md-3">
+    <h3>Авторизация</h3>
+    <br>
+    <form action="{% url 'home' %}" method="post">
+      {% csrf_token %}
+      <div class="mb-3">
+        <input type="text" class="form-control" name="username" placeholder="Логин" required>
+      </div>
+      <div class="mb-3">
+        <input type="password" class="form-control" name="password" placeholder="Пароль" required>
+      </div>
+      <button type="submit" class="btn btn-success">Войти</button>
+    </form>
+  </div>
+  {% endif %}
+
+{% endblock content %}

@@ -1,0 +1,64 @@
+{% extends "website/base.html" %}
+{% block content %}
+{% if user.is_authenticated %}
+
+  <div class="col-md-9 offset-md-1">
+  <h1>Учебный список имён</h1>
+    <br>
+    <a href="{% url 'add_record' %}">Добавить</a>
+    <br><br>
+
+    <table class="table table-bordered table-hover">
+      <thead class="table-success">
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Name</th>
+          <th scope="col">Email</th>
+          <th scope="col">Phone</th>
+          <th scope="col">City</th>
+          <th scope="col">Created At</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% if records %}
+          {% for record in records %}
+        <tr>
+          <td><a href="{% url 'record' record.id %}">{{ record.id }}</a></td>
+          <td><a href="{% url 'record' record.id %}">{{ record.first_name }} {{ record.last_name }}</a></td>
+          <td>
+            {{ record.email }}
+          </td>
+          <td>
+            {{ record.phone }}
+          </td>
+          <td>
+            {{ record.city }}
+          </td>
+          <td>
+            {{ record.created_at }}
+          </td>
+        </tr>
+        {% endfor %}
+        {% endif %}
+      </tbody>
+    </table>
+
+  <br>
+  </div>
+  {% else %}
+  <div class="col-md-6 offset-md-3">
+    <h1>Войти</h1>
+    <form action="{% url 'home' %}" method="post">
+      {% csrf_token %}
+      <div class="mb-3">
+        <input type="text" class="form-control" name="username" placeholder="Username..." required>
+      </div>
+      <div class="mb-3">
+        <input type="password" class="form-control" name="password" placeholder="Password..." required>
+      </div>
+      <button type="submit" class="btn btn-success">Login</button>
+    </form>
+  </div>
+  {% endif %}
+
+{% endblock content %}

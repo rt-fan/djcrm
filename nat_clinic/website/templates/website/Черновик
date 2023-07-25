@@ -1,0 +1,189 @@
+-> tasks.html
+
+-----------------------------------------------------------------------------------
+
+<div class="col-4">
+    <input class="" type="text" placeholder="Поиск заявок...">
+</div>
+<div class="col-1">
+    <button type="submit" value="search">Поиск</button>
+</div>
+
+-----------------------------------------------------------------------------------
+
+    <br>
+    <div class="row">
+    <div class="col-sm-6"><a href="{% url 'add_task' %}" class="btn btn-success">Новая заявка</a></div>
+    <br><div class="col-sm-6">
+      <form method="post" action="{% url 'search' %}">
+      {% csrf_token %}
+      {{ form }}
+    </form>
+    </div>
+    </div>
+    <br>
+
+
+-----------------------------------------------------------------------------------
+
+<a href="{% url 'search' %}" class="btn btn-success">Поиск</a>
+
+===================================================================================
+
+-> ??? Шамиль, для того чтобы кнопка и поле ввода были в одну строку.
+
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <a class="navbar-brand" href="#">Заявки</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+      <form class="form-inline mt-2 mt-md-0">
+        <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Поиск</button>
+      </form>
+    </div>
+</nav>
+
+-----------------------------------------------------------------------------------
+
+<div class="container mb-3">
+    <div class="my-3 p-3 bg-white rounded shadow-sm">
+        <h2 class="pb-2 mb-0">Заявки</h2>
+            <div class="media text-muted pt-3">
+                <div class="media-body pb-3 mb-0 small lh-125">
+                    <div class="d-flex justify-content-between align-items-center w-100">
+                        <strong class="text-gray-dark"><a href="/add_task/" class="btn btn-success">Новая заявка</a></strong>
+                        <form method="post" action="/search/">
+                            <input type="hidden" name="csrfmiddlewaretoken" value="SJRXAjIqOcRW5AUgNgHNQsTbMX0kerxT1EXVQlzvsH3E136qbROIDgdjsp5Gcbyj">
+                            <input type="text" name="query" class="form-control" placeholder="Поиск..." id="id_query">
+                        </form>
+                    </div>
+                </div>
+            </div>
+    </div>
+</div>
+
+-----------------------------------------------------------------------------------
+
+    <br>
+    <div class="row">
+    <div class="col-sm-6"><a href="{% url 'add_task' %}" class="btn btn-success">Новая заявка</a></div>
+    <br><div class="col-sm-6">
+      <form method="post" action="{% url 'search' %}">
+      {% csrf_token %}
+      {{ form }}
+    </form>
+    </div>
+    </div>
+    <br>
+
+===================================================================================
+
+-> navbar.html
+
+            {% else%}
+            <li class="nav-item">
+              <a class="nav-link"  href="{% url 'home'%}">Login</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link"  href="{% url 'register'%}">Register</a>
+            </li>
+
+-----------------------------------------------------------------------------------
+
+# подчеркивание ссылок в Навбаре:
+<ul class="navbar-nav ms-auto mb-2 mb-lg-0 top-menu">
+
+-----------------------------------------------------------------------------------
+
+<li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#">Персонал</a>
+    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <li><a class="dropdown-item" href="{% url 'divisions'%}">Подразделения</a></li>
+        <li><a class="dropdown-item" href="{% url 'staffs'%}">Сотрудники</a></li>
+    </ul>
+</li>
+
+-----------------------------------------------------------------------------------
+
+
+
+===================================================================================
+
+-> staff.html
+
+<div class="row">
+  <div class="card col-8 mb-3">
+    <div class="card-body">
+      <div class="card_inline">
+        <h5 class="card-title">{{ staff.first_name }} {{ staff.last_name }}</h5>
+        <br>
+        <p class="card-text"><strong>Номер телефона: </strong> {{ staff.phone }}</p>
+        <p class="card-text"><strong>Год рождения: </strong> {{ staff.age }}</p>
+        <p class="card-text"><strong>Подразделение: </strong> {{ staff.division }}</p>
+        <p class="card-text"><strong>Дата создания: </strong> {{ staff.created_at }}</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-1">
+  </div>
+  <div class="card1 col-3 mb-3">
+    {% if staff.photo_passport %}
+      <img class="img-article-left thumb" src="{{staff.photo_passport.url}}" width="240">
+    {% endif %}
+  </div>
+</div>
+
+-----------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
